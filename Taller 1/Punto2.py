@@ -1,6 +1,6 @@
 def suma_digitos(numero):
     suma = 0
-    while numero > 0: # O(log10(numero))
+    while numero > 0: # O(n)
         ultimo_digito = numero % 10 # O(1)
         suma += ultimo_digito # O(1)
         numero //= 10 # O(1)
