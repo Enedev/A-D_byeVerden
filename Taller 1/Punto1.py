@@ -1,3 +1,7 @@
+#Dado las dimensiones de una matriz cuadrada, mostrar los
+#índices de la matriz en forma de zig-zag empezando por la
+#posición[n][n].
+
 matrix = [
     [1, 2, 3],
     [4, 5, 6],
