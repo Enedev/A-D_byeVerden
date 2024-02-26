@@ -4,7 +4,7 @@ def permutaciones(cadena):
     
     if len(cadena) <= 1: # O(1)
         return [cadena] # O(1)
-    resultado = [] # O(1)
+    resultado = [] # O(1) # O(1)
 
     pila = [(cadena, '')] # O(1) # O(1)
     
@@ -22,8 +22,8 @@ def permutaciones(cadena):
     return resultado # O(1)
 
 #pruebas
-cadena = "123" # O(1) # O(n)
+cadena = "123" # O(1) # O(1)
 print(permutaciones(cadena))
 
-cadena = "456" # O(1) # O(n)
+cadena = "456" # O(1) # O(1)
 print(permutaciones(cadena))
