@@ -6,24 +6,24 @@ def permutaciones(cadena):
         return [cadena] # O(1)
     resultado = [] # O(1)
 
-    pila = [(cadena, '')] #O(1)
+    pila = [(cadena, '')] # O(1) # O(1)
     
     while pila: #O(n)
-        actual, permutacion_parcial = pila.pop()#O(n)
+        actual, permutacion_parcial = pila.pop() # O(n) # O(n)
 
         if len(actual) == 1:#O(n)
-            resultado.append(permutacion_parcial + actual)#O(n)
+            resultado.append(permutacion_parcial + actual) # O(n)
             
         else:#O(n)
-            for i in range(len(actual)): #O(n)
-                siguiente_permutacion = actual[:i] + actual[i+1:]#O(n)
-                pila.append((siguiente_permutacion, permutacion_parcial + actual[i]))#O(n)
+            for i in range(len(actual)): # O(n)
+                siguiente_permutacion = actual[:i] + actual[i+1:] # O(n) # O(n)
+                pila.append((siguiente_permutacion, permutacion_parcial + actual[i])) #O(n)
 
     return resultado # O(1)
 
 #pruebas
-cadena = "123" # O(1)
+cadena = "123" # O(1) # O(n)
 print(permutaciones(cadena))
 
-cadena = "456" # O(1)
+cadena = "456" # O(1) # O(n)
 print(permutaciones(cadena))
