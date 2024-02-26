@@ -15,12 +15,16 @@ solution = [[] for i in range(rows + columns - 1)] # This list is used to store 
 
 start_row = 2
 start_column = 2 
-
+#iterates over rows in reverse order
 for i in range(start_row, -1, -1): # O(n)
-    for j in range(i if i == start_row else columns - 1, -1, -1):  # Fixed the starting point for j # O(n)
+    # iterates over the columns in reverse order
+    for j in range(i if i == start_row else columns - 1, -1, -1):   # O(n)
+        #Calculate the sum of i and j to determine the index in solution
         sum = i + j
-        solution[sum].insert(0, matrix[i][j])  # O(1)    
+        # insert the current element 
+        solution[sum].insert(0, matrix[i][j])  # O(1)  
 
+#print the zigzag
 for i in solution[::-1]:  # O(n)
     for j in i: # O(n)
         # Complejidad Temporal: O(1)

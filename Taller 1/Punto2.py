@@ -4,7 +4,7 @@
 def sum_digits(number):
     total_sum = 0 # O(1) # O(1)
     
-    # Convert the number to a string to iterate over its digits
+    # Convert the number to a string 
     for digit in str(number): # O(n)
         # Convert each digit back to an integer and add it to the total sum
         total_sum += int(digit) # O(1)
