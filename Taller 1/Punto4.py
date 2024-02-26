@@ -1,6 +1,5 @@
 """
-Combinaciones de un Conjunto: Implementa una función recursiva que muestre todas las combinaciones posibles de un conjunto dado. 
-Por ejemplo, dado el conjunto {1,2,3} la función debería retornar todas las subconjuntos posibles.
+Combinaciones de un Conjunto: Implementa una función recursiva que muestre todas las combinaciones posibles de un conjunto dado.
 """
 
 def subconjuntos(inicial, actual=[]):
