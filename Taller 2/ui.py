@@ -1,30 +1,8 @@
 #Interfaz de usuario
 
-import math
-
-def combinacion_con_repeticion(m, n):
-    return (math.factorial(m + n - 1)) // ((math.factorial(n)) * (math.factorial(m - 1)))
-
-def combinacion_sin_repeticion(m, n):
-    return math.comb(m, n)
-
-def variacion_sin_repeticion(m, n):
-    return math.perm(m, n)
-
-def variacion_con_repeticion(m, n):
-    return m ** n
-
-def permutacion_con_repeticion(m, list):
-  result = math.factorial(m)
-  for i in list:
-    result = result // math.factorial(i)
-  return result
-
-def permutacion_sin_repeticion(m):
-    return math.factorial(m)
-
-#Interfaz de usuario
-
+from combination import combinacion_con_repeticion, combinacion_sin_repeticion
+from permutation import permutacion_con_repeticion, permutacion_sin_repeticion
+from variation import variacion_con_repeticion, variacion_sin_repeticion
 
 def determinar_tipo_problema(respuestas):
     if respuestas[0] == 's':
