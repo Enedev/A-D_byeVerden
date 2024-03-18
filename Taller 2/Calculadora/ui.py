@@ -41,7 +41,7 @@ def main():
     print("Resolución de problemas de conteo")
     print("Por favor, responda las siguientes preguntas:")
     respuesta_AM = input("Necesito resolver un problema con principio aditivo o multiplicativo? (s/n):  ").lower()
-    if respuesta_AM:
+    if respuesta_AM == "s":
       return ui_AM()
     respuesta_orden = input("1. ¿Importa el orden? (s/n): ").lower()
     respuesta_intervienen = input("2. ¿Intervienen todos los elementos? (s/n): ").lower()
