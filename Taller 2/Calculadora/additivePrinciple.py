@@ -1,6 +1,6 @@
 import math
 
-def principioAditivo(numeros):  
+def principioAditivo(numeros):  #O(n)
     listaNumeros = list(map(int, numeros.split(","))) #Complejidad temporal: O(n) Complejidad espacial: O(1)
 
     if any(not isinstance(numero, int) for numero in listaNumeros):

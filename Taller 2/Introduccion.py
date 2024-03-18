@@ -49,9 +49,9 @@ def situaciones_vida_real(): #0(1)
     print("Los conceptos de conteo, permutación, combinación y variación se utilizan en numerosas situaciones de la vida real, como en la planificación de eventos, la elaboración de menús, la creación de contraseñas seguras, el diseño de experimentos, la distribución de premios, entre otros.\n")
     #0(1)
 
-def mostrar_menu():
+def mostrar_menu():#0(n)
     # Función principal que muestra un menú de opciones y llama a las funciones correspondientes según la opción seleccionada.
-    while True:
+    while True:#0(n)
         print("Bienvenido al sistema de definiciones de conteo:") #0(1)
         print("1. Introducción al conteo") #0(1)
         print("2. Definición de permutación") #0(1)
@@ -85,4 +85,4 @@ def mostrar_menu():
             print("Opción no válida. Por favor, seleccione una opción válida.\n") #0(1)
 
 # Ejecutar la función para mostrar el menú
-mostrar_menu() 
+mostrar_menu() #0(n)
