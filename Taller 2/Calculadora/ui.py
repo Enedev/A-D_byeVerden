@@ -1,5 +1,6 @@
 #Interfaz de usuario
 
+#Modularización
 from combination import combinacion_con_repeticion, combinacion_sin_repeticion
 from permutation import permutacion_con_repeticion, permutacion_sin_repeticion
 from variation import variacion_con_repeticion, variacion_sin_repeticion

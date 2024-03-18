@@ -1,3 +1,5 @@
+import math
+
 def principioAditivo(numeros):
     listaNumeros = list(map(int, numeros.split(",")))
 

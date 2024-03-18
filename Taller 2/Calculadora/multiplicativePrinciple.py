@@ -1,3 +1,5 @@
+import math
+
 def principioMultiplicativo(numerosMultiplicativo):
     listaNumeros = list(map(int, numerosMultiplicativo.split(",")))
 
