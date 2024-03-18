@@ -1,11 +1,11 @@
 import math
 
-def principioAditivo(numeros):
-    listaNumeros = list(map(int, numeros.split(",")))
+def principioAditivo(numeros):  
+    listaNumeros = list(map(int, numeros.split(","))) #Complejidad temporal: O(n) Complejidad espacial: O(1)
 
     if any(not isinstance(numero, int) for numero in listaNumeros):
-        return "Error, ingresaste un valor no numérico"
+        return "Error, ingresaste un valor no numérico" #O(1)
 
-    total = math.fsum(listaNumeros)
+    total = math.fsum(listaNumeros) #Complejidad temporal: O(n) Complejidad espacial: O(1) 
 
-    return total
+    return total #O(1)
