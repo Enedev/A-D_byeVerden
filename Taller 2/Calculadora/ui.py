@@ -3,6 +3,8 @@
 from combination import combinacion_con_repeticion, combinacion_sin_repeticion
 from permutation import permutacion_con_repeticion, permutacion_sin_repeticion
 from variation import variacion_con_repeticion, variacion_sin_repeticion
+from additivePrinciple import principioAditivo
+from multiplicativePrinciple import principioMultiplicativo
 
 def determinar_tipo_problema(respuestas):
     # Lógica para determinar el tipo de problema basado en las respuestas dadas
@@ -24,10 +26,23 @@ def determinar_tipo_problema(respuestas):
             elif respuestas[2] == 's':
                 return "Combinación con repetición"
 
+def ui_AM ():
+  numeros = input("Ingrese el numero de posibilidades para cada uno, separados por coma :")
+  pregunta = input("¿Pueden ocurrir al mismo tiempo? s/n").lower()
+  if pregunta == "s":
+    resultado = principioMultiplicativo(numeros)
+  else :
+    resultado = principioAditivo(numeros)
+
+  print("El resultado es:", resultado)
+
 def main():
     #Interfaz de inputs de usuarios 
     print("Resolución de problemas de conteo")
     print("Por favor, responda las siguientes preguntas:")
+    respuesta_AM = input("Necesito resolver un problema con principio aditivo o multiplicativo? (s/n):  ").lower()
+    if respuesta_AM:
+      return ui_AM()
     respuesta_orden = input("1. ¿Importa el orden? (s/n): ").lower()
     respuesta_intervienen = input("2. ¿Intervienen todos los elementos? (s/n): ").lower()
     respuesta_repiten = input("3. ¿Se repiten los elementos? (s/n): ").lower()
