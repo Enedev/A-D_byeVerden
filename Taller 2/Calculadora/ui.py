@@ -13,7 +13,7 @@ def determinar_tipo_problema(respuestas):
         if respuestas[1] == 'n': #O(1)
             if respuestas[2] == 'n': #O(1)
                 return "Variación ordinaria" #O(1)
-            elif respuestas[2] == 's': O(1)
+            elif respuestas[2] == 's': #O(1)
                 return "Variación con repetición" #O(1)
         elif respuestas[1] == 's': #O(1)
             if respuestas[2] == 'n': #O(1)
