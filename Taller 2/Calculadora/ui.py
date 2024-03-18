@@ -7,7 +7,7 @@ from variation import variacion_con_repeticion, variacion_sin_repeticion
 from additivePrinciple import principioAditivo
 from multiplicativePrinciple import principioMultiplicativo
 
-def determinar_tipo_problema(respuestas):
+def determinar_tipo_problema(respuestas): #O(1)
     # Lógica para determinar el tipo de problema basado en las respuestas dadas
     if respuestas[0] == 's': #O(1)
         if respuestas[1] == 'n': #O(1)
@@ -27,7 +27,7 @@ def determinar_tipo_problema(respuestas):
             elif respuestas[2] == 's': #O(1)
                 return "Combinación con repetición" #O(1)
 
-def ui_AM ():
+def ui_AM (): #O(n)
   numeros = input("Ingrese el numero de posibilidades para cada uno, separados por coma :") #Complejidad espacial : O(1) # Complejidad temporal : O(1)
   pregunta = input("¿Pueden ocurrir al mismo tiempo? s/n").lower() #Complejidad espacial : O(1) # Complejidad temporal : O(1)
   if pregunta == "s": #O(1)
@@ -37,17 +37,17 @@ def ui_AM ():
 
   print("El resultado es:", resultado) #O(1)
 
-def main():
+def main(): #O(n)
     #Interfaz de inputs de usuarios 
-    print("Resolución de problemas de conteo")
-    print("Por favor, responda las siguientes preguntas:")
-    respuesta_AM = input("Necesito resolver un problema con principio aditivo o multiplicativo? (s/n):  ").lower()
-    if respuesta_AM == "s":
-      return ui_AM()
-    print("Al no ser un principio aditivo o multiplicativo, responda las siguientes preguntas:")
-    respuesta_orden = input("1. ¿Importa el orden? (s/n): ").lower()
-    respuesta_intervienen = input("2. ¿Intervienen todos los elementos? (s/n): ").lower()
-    respuesta_repiten = input("3. ¿Se repiten los elementos? (s/n): ").lower()
+    print("Resolución de problemas de conteo") #O(1)
+    print("Por favor, responda las siguientes preguntas:") #O(1)
+    respuesta_AM = input("Necesito resolver un problema con principio aditivo o multiplicativo? (s/n):  ").lower() #O(1)
+    if respuesta_AM == "s": #O(1)
+      return ui_AM() #O(n)
+    print("Al no ser un principio aditivo o multiplicativo, responda las siguientes preguntas:") #O(1)
+    respuesta_orden = input("1. ¿Importa el orden? (s/n): ").lower() #O(1)
+    respuesta_intervienen = input("2. ¿Intervienen todos los elementos? (s/n): ").lower() #O(1)
+    respuesta_repiten = input("3. ¿Se repiten los elementos? (s/n): ").lower()#O(1)
 
     # Determinar el tipo de problema de conteo según las respuestas del usuario
     tipo_problema = determinar_tipo_problema((respuesta_orden, respuesta_intervienen, respuesta_repiten)) #Complejidad espacial : O(1) # Complejidad temporal : O(1)
