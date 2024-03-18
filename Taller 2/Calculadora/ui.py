@@ -39,14 +39,15 @@ def ui_AM ():
 
 def main():
     #Interfaz de inputs de usuarios 
-    print("Resolución de problemas de conteo") #O(1)
-    print("Por favor, responda las siguientes preguntas:") #O(1)
-    respuesta_AM = input("Necesito resolver un problema con principio aditivo o multiplicativo? (s/n):  ").lower() #Complejidad espacial : O(1) # Complejidad temporal : O(1)
-    if respuesta_AM == "s": #O(1)
-      return ui_AM() #O(n)
-    respuesta_orden = input("1. ¿Importa el orden? (s/n): ").lower() #Complejidad espacial : O(1) # Complejidad temporal : #O(1)
-    respuesta_intervienen = input("2. ¿Intervienen todos los elementos? (s/n): ").lower() #Complejidad espacial : O(1) # Complejidad temporal : #O(1)
-    respuesta_repiten = input("3. ¿Se repiten los elementos? (s/n): ").lower() #Complejidad espacial : O(1) # Complejidad temporal : #O(1)
+    print("Resolución de problemas de conteo")
+    print("Por favor, responda las siguientes preguntas:")
+    respuesta_AM = input("Necesito resolver un problema con principio aditivo o multiplicativo? (s/n):  ").lower()
+    if respuesta_AM == "s":
+      return ui_AM()
+    print("Al no ser un principio aditivo o multiplicativo, responda las siguientes preguntas:")
+    respuesta_orden = input("1. ¿Importa el orden? (s/n): ").lower()
+    respuesta_intervienen = input("2. ¿Intervienen todos los elementos? (s/n): ").lower()
+    respuesta_repiten = input("3. ¿Se repiten los elementos? (s/n): ").lower()
 
     # Determinar el tipo de problema de conteo según las respuestas del usuario
     tipo_problema = determinar_tipo_problema((respuesta_orden, respuesta_intervienen, respuesta_repiten)) #Complejidad espacial : O(1) # Complejidad temporal : O(1)
