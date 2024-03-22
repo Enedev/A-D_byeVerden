@@ -1,11 +1,16 @@
 import math
+from FloatNotAllowed import FloatNotAllowed
+from NegativeIntegerNotAllowed import NegativeIntegerNotAllowed
 
-def principioAditivo(numeros):  #O(n)
-    listaNumeros = list(map(int, numeros.split(","))) #Complejidad temporal: O(n) Complejidad espacial: O(1)
+def principioAditivo(numeros):  
+    listaNumeros = list(map(int, numeros.split(",")))
 
     if any(not isinstance(numero, int) for numero in listaNumeros):
-        return "Error, ingresaste un valor no numérico" #O(1)
+        raise FloatNotAllowed("No se permiten valores decimales.")
 
-    total = math.fsum(listaNumeros) #Complejidad temporal: O(n) Complejidad espacial: O(1) 
+    if any(numero < 0 for numero in listaNumeros):
+        raise NegativeIntegerNotAllowed("No se permiten números enteros negativos.")
 
-    return total #O(1)
+    total = math.fsum(listaNumeros)
+
+    return total
