@@ -30,6 +30,8 @@ def determinar_tipo_problema(respuestas): #O(1)
             elif respuestas[2] == 's': #O(1)
                 return "Combinación con repetición" #O(1)
 
+    return None
+
 def ui_AM (): #O(n)
     while True:
         try: 
@@ -55,6 +57,9 @@ def ui_AM (): #O(n)
     print("El resultado es:", resultado) #O(1)
 
 def main(): #O(n)
+    
+    resultado = None
+    
     while True:
         #Interfaz de inputs de usuarios 
         print("Resolución de problemas de conteo") #O(1)
@@ -69,16 +74,18 @@ def main(): #O(n)
             respuesta_intervienen = input("2. ¿Intervienen todos los elementos? (s/n): ").lower() #O(1)
             respuesta_repiten = input("3. ¿Se repiten los elementos? (s/n): ").lower()#O(1)
 
-            
             try:
-            
                 # Determinar el tipo de problema de conteo según las respuestas del usuario
                 tipo_problema = determinar_tipo_problema((respuesta_orden, respuesta_intervienen, respuesta_repiten)) #Complejidad espacial : O(1) # Complejidad temporal : O(1)
+                
+                if tipo_problema is None:
+                    print ("No se identifico un tipo de problema valido ...")
+                    break
+                
                 print("Tipo de problema:", tipo_problema) #O(1)
                 # Dependiendo del tipo de problema, se ejecuta la solución correspondiente
                 # Por cada tipo_problema hay que especificar alguna pregunta y luego el resultado lo da la función correspondiente
             
-                
                 if tipo_problema == "Variación ordinaria": #O(1)
                     m = int(input("Ingrese el número total de elementos (m): ")) #Complejidad espacial : O(1) # Complejidad temporal : O(1)
                     n = int(input("Ingrese el número de elementos a seleccionar (n): ")) #Complejidad espacial : O(1) # Complejidad temporal : O(1)
@@ -118,13 +125,12 @@ def main(): #O(n)
                  
             except Exception as e:
                 print("Error:", e)
-
-        print (" Se debe responder n ó s")
-            
-    print("El resultado es:", resultado) #O(1)
+        if respuesta_AM != "s" and respuesta_AM != "n":
+            print("Se debe responder n ó s")
+        
+    if resultado is not None:
+          
+        print("El resultado es:", resultado) #O(1)
 
 if __name__ == "__main__": 
-    main() 
-
-if __name__ == "__main__": 
-    main() 
+    main()
