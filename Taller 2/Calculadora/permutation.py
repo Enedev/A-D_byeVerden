@@ -32,6 +32,7 @@ def permutacion_con_repeticion(m, list): #O(n)
     result = result // math.factorial(i) #Complejidad temporal: O(n) Complejidad espacial: O(n)
   return result #0(1)
 
+
 def permutacion_sin_repeticion(m): #O(n)
     # calcula el factorial de m
     
