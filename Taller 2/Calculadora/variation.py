@@ -23,6 +23,9 @@ def variacion_con_repeticion(m, n): #O(n)
     # Calcula la variación con repetición mediante la fórmula m^n
     # Donde m es el número total de elementos y n es el número de veces que se pueden repetir los elementos
     
+    if n > m:
+        raise CountingIsNotPossible("No es posible realizar el conteo con los valores ingresados ... ")
+    
     if isinstance(m, float) or isinstance(n, float):
         raise FloatNotAllowed("No se permiten valores decimales.")
 
