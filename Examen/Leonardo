@@ -1,0 +1,27 @@
+#Construya un algoritmo recursivo que convierta un número decimal en una cadena que represente el valor del número en octal (base 8).
+
+def DecToOct(n, Oct = [], max_exp=0 ):
+  #caso inicial...
+  if n == 0:
+
+    StringOct = ""
+    for element in reversed(Oct):
+      StringOct += str(element) + " "
+
+    return StringOct
+  
+  #A esta parte del codigo solo se debe llegar una vez
+  if Oct == []:
+    exp=0
+    while n >= 8**exp:
+      exp += 1
+
+    max_exp = exp-1
+    Oct = [0] * (max_exp+1)
+
+  #caso recursivo
+  cant = n // 8**max_exp
+  n = n - cant*(8**max_exp)
+  Oct[max_exp] = cant
+
+  return DecToOct(n, Oct, max_exp-1)
