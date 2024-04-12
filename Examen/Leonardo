@@ -1,0 +1,31 @@
+def DecToOct(n, Oct = [], max_exp=0 ):
+  #caso base ...
+  if n == 0:
+    StringOct = ""
+    for element in reversed(Oct):
+      StringOct += str(element) + " "
+
+    return StringOct
+  
+  #A esta parte del codigo solo se debe llegar una vez (Caso inicial)
+  #excepciones:
+  if type(n) is not int:
+    print("Solo se puede numero entero :)")
+    return None
+
+  if Oct == []:
+    exp=0
+    while n >= 8**exp:
+      exp += 1
+
+    max_exp = exp-1
+    Oct = [0] * (max_exp+1)
+
+  #caso recursivo
+  cant = n // 8**max_exp
+  n = n - cant*(8**max_exp)
+  Oct[max_exp] = cant
+
+  return DecToOct(n, Oct, max_exp-1)
+
+print(DecToOct(123))
