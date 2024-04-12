@@ -1,1 +1,40 @@
+#Punto 1
 
+#Punto 2
+def generar_subconjuntos(conjunto):
+  subconjuntos = []
+  if len(conjunto) == 0:
+    subconjuntos.append([])
+    return subconjuntos
+
+  primer_elemento = conjunto[0]
+  resto_del_conjunto = conjunto[1:]
+
+  subconjuntos_sin_primer_elemento = generar_subconjuntos(resto_del_conjunto)
+
+  for subconjunto in subconjuntos_sin_primer_elemento:
+    nuevo_subconjunto = subconjunto[:]
+    nuevo_subconjunto.append(primer_elemento)
+    subconjuntos.append(nuevo_subconjunto)
+
+  subconjuntos.extend(subconjuntos_sin_primer_elemento)
+
+  return subconjuntos
+subconjuntos = generar_subconjuntos(conjunto)
+print("Subconjuntos:", subconjuntos)
+
+
+#Punto 3
+def combinaciones(n, k):
+  if k > n:
+    return 0
+  if k == 0 or k == n:
+    return 1
+  return combinaciones(n - 1, k - 1) + combinaciones(n - 1, k)
+
+total_combinaciones = combinaciones(12 + 8, 5)
+Combinaciones_sin_restricción_de_historial  = combinaciones(12, 5)
+Combinaciones_con_menos_de_dos_elementos_de_historial = Combinaciones_sin_restricción_de_historial  - combinaciones(8, 3)
+Combianciones_con_almenos_dos_elementos_de_historial = total_combinaciones - Combinaciones_con_menos_de_dos_elementos_de_historial
+
+print("Total de numeros a seleccionar:", Combianciones_con_almenos_dos_elementos_de_historial)
