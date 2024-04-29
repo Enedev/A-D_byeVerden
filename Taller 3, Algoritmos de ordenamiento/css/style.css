@@ -1,0 +1,30 @@
+body{
+    background-color: cornflowerblue;
+}
+table thead {
+    background:#302b63;
+    color:white;
+}
+
+.boxes {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.button {
+    border: none;
+    background-color: #fff; /* Fondo blanco por defecto */
+    color: #333; /* Texto negro */
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px 12px; /* Espacio alrededor del texto */
+    transition: background-color 0.3s ease; /* Transición suave para el cambio de color de fondo */
+}
+
+.button:hover {
+    background-color: #ccc; /* Fondo gris al pasar el mouse */
+}
+
+.button.clicked {
+    background-color: #3c9; /* Fondo verde al hacer clic */
+}
