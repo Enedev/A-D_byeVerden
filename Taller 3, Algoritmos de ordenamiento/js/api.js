@@ -1,8 +1,11 @@
 let data; // Variable global para almacenar los datos
+let pageSize = 20; // Número de elementos por página
+let totalPages; // Total de páginas
+let currentPage = 1; // Página actual
 
 function generateRandomDates() {
     // Generar un número entero aleatorio entre -10000 y 10000 para el ID
-    return Math.floor(Math.random() * 1990) - 0;
+    return Math.floor(Math.random() * 1990) - 1000;
 }
 
 // Cambiar el randomGenerate
@@ -19,26 +22,72 @@ function fetchAndShowData() {
                 user.area_produccion = parseFloat(user.area_produccion); // Convertir a número
                 user.volumen_produccion = parseFloat(user.volumen_produccion); // Convertir a número
             });
-            
+
             data = result;
-            mostrarData(data);
+            totalPages = Math.ceil(data.length / pageSize); // Calcular el total de páginas
+            mostrarData(data, currentPage);
+            renderPagination();
         })
         .catch(error => console.log(error));
 }
 
 
-function mostrarData(data) {
+function renderPagination() {
+    let paginationHtml = '';
+    const maxPagesToShow = 10; // Máximo de páginas a mostrar alrededor de la actual
+
+    // Botón para la primera página
+    paginationHtml += `<button class="btn btn-outline-primary mx-2" onclick="changePage(1)" id="firstPageButton">First</button>`;
+
+    // Mostrar páginas alrededor de la actual
+    let startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
+    let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+
+    // Ajustar el inicio y fin si no se muestra el máximo de páginas
+    if (endPage - startPage + 1 < maxPagesToShow) {
+        startPage = Math.max(1, endPage - maxPagesToShow + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+        if (i === currentPage) {
+            paginationHtml += `<span class="mx-2">${i}</span>`;
+        } else {
+            paginationHtml += `<button class="btn btn-outline-primary mx-2" onclick="changePage(${i})">${i}</button>`;
+        }
+    }
+
+    // Botón para la última página
+    paginationHtml += `<button class="btn btn-outline-primary mx-2" onclick="changePage(${totalPages})">Last</button>`;
+
+    document.getElementById('pagination-container').innerHTML = paginationHtml;
+}
+
+
+function changePage(pageNumber) {
+    currentPage = pageNumber;
+    mostrarData(data, currentPage);
+    renderPagination();
+}
+
+function mostrarData(data, page) {
+    
+    let startIndex = (page - 1) * pageSize;
+    let endIndex = startIndex + pageSize;
+    let pageData = data.slice(startIndex, endIndex);
+
     let body = "";
-    for (let i = 0; i < data.length; i++) {
-        body += `<tr><td>${data[i].tipo}</td><td>
-        ${data[i].rubro}</td><td>${data[i].subregion}</td><td>${data[i].anio}</td><td>${data[i].municipio}</td>
-        <td>${data[i].area_total}</td>
-        <td>${data[i].area_produccion}</td>
-        <td>${data[i].volumen_produccion}</td></tr>`;
+    for (let i = 0; i < pageData.length; i++) {
+        body += `<tr><td>${pageData[i].tipo}</td><td>
+        ${pageData[i].rubro}</td><td>${pageData[i].subregion}</td><td>${pageData[i].anio}</td><td>${pageData[i].municipio}</td>
+        <td>${pageData[i].area_total}</td>
+        <td>${pageData[i].area_produccion}</td>
+        <td>${pageData[i].volumen_produccion}</td></tr>`;
     }
     document.getElementById('data').innerHTML = body;
     console.log("Datos mostrados en la tabla");
+    
 }
+// Resto de tu código...
 
 function sortData(method,propertyName) {
     if (method === 'bubble') {
@@ -60,8 +109,8 @@ function sortData(method,propertyName) {
     }else if (method === 'radix') {
         heapSort(data, propertyName);
     }
-    
-    mostrarData(data); // Actualizar la tabla después de ordenar
+    currentPage = 1; 
+    mostrarData(data, currentPage); // Actualizar la tabla después de ordenar
 }
 
 // Función para vaciar los elementos select
@@ -70,12 +119,35 @@ function vaciarSelects() {
     $('#metodoSelect').val('');
 }
 
+function checkForNegativeValues(columnName) {
+    return data.some(item => item[columnName] < 0);
+}
 // Función para abrir el modal de ordenar
 function openOrdenarModal() {
-    vaciarSelects(); // Vaciar los selects antes de abrir el modal
+    vaciarSelects(); // Vaciar los selects before opening the modal
+
+    // Add an event listener to the column select element
+    $('#columnaSelect').on('change', function() {
+        let columnName = $(this).val();
+
+        // Check if the selected column contains negative values
+        if (checkForNegativeValues(columnName)) {
+            // Disable the counting, radix, and bucket sort options
+            $('#metodoSelect option[value="counting"]').prop('disabled', true);
+            $('#metodoSelect option[value="radix"]').prop('disabled', true);
+            $('#metodoSelect option[value="bucket"]').prop('disabled', true);
+
+            // Display a clear explanation
+            $('#exclusionMessage').text('Counting, Radix, and Bucket sorts are disabled because they do not work with negative numbers.');
+        } else {
+            // Enable all options
+            $('#metodoSelect option').prop('disabled', false);
+            $('#exclusionMessage').text('');
+        }
+    });
+
     $('#ordenarModal').modal('show');
 }
-
 // Función para ordenar los datos
 function ordenarDatos() {
     let columna = $('#columnaSelect').val();
