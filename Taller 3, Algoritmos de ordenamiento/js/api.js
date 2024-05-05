@@ -40,12 +40,7 @@ function mostrarData(data) {
     console.log("Datos mostrados en la tabla");
 }
 
-
-function updatePropertyName(newPropertyName) {
-    propertyName = newPropertyName;
-}
-
-function sortData(method) {
+function sortData(method,propertyName) {
     if (method === 'bubble') {
         bubbleSort(data, propertyName);
     } else if (method === 'quick') {
@@ -67,6 +62,27 @@ function sortData(method) {
     }
     
     mostrarData(data); // Actualizar la tabla después de ordenar
+}
+
+// Función para vaciar los elementos select
+function vaciarSelects() {
+    $('#columnaSelect').val('');
+    $('#metodoSelect').val('');
+}
+
+// Función para abrir el modal de ordenar
+function openOrdenarModal() {
+    vaciarSelects(); // Vaciar los selects antes de abrir el modal
+    $('#ordenarModal').modal('show');
+}
+
+// Función para ordenar los datos
+function ordenarDatos() {
+    let columna = $('#columnaSelect').val();
+    let metodo = $('#metodoSelect').val();
+    sortData(metodo, columna);
+    $('#ordenarModal').modal('hide'); // Cierra el modal al ordenar
+    vaciarSelects(); // Vaciar los selects después de ordenar
 }
 
 fetchAndShowData(); // Cargar y mostrar los datos al cargar la página

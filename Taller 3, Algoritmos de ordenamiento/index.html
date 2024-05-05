@@ -9,41 +9,53 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="boxes">
-        <h3>Ordenar según</h3>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="ordenarPorDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                Ordenar por
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="ordenarPorDropdown">
-                <li><a class="dropdown-item" href="#" onclick="updatePropertyName('anio'); toggleButtonColor(this);">Año</a></li>
-                <li><a class="dropdown-item" href="#" onclick="updatePropertyName('area_total'); toggleButtonColor(this);">Área Total</a></li>
-                <li><a class="dropdown-item" href="#" onclick="updatePropertyName('area_produccion'); toggleButtonColor(this);">Área Producción</a></li>
-                <li><a class="dropdown-item" href="#" onclick="updatePropertyName('volumen_produccion'); toggleButtonColor(this);">Volumen Producción</a></li>
-            </ul>
-        </div>
+    <div class="container mt-4 text-center">
+        <button class="btn btn-primary" onclick="openOrdenarModal()">Ordenar</button>
     </div>
-    <div class="boxes">
-        <h3>Qué método de ordenamiento usar</h3>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="metodoOrdenamientoDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                Método de Ordenamiento
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="metodoOrdenamientoDropdown">
-                <li><a class="dropdown-item" href="#" onclick="sortData('bubble'); toggleButtonColor(this);">Bubble Sort</a></li>
-                <li><a class="dropdown-item" href="#" onclick="sortData('quick'); toggleButtonColor(this);">Quick Sort</a></li>
-                <li><a class="dropdown-item" href="#" onclick="sortData('merge'); toggleButtonColor(this);">Merge Sort</a></li>
-                <li><a class="dropdown-item" href="#" onclick="sortData('counting'); toggleButtonColor(this);">Counting Sort</a></li>
-                <li><a class="dropdown-item" href="#" onclick="sortData('selection'); toggleButtonColor(this);">Selection Sort</a></li>
-                <li><a class="dropdown-item" href="#" onclick="sortData('insertion'); toggleButtonColor(this);">Insertion Sort</a></li>
-                <li><a class="dropdown-item" href="#" onclick="sortData('bucket'); toggleButtonColor(this);">Bucket Sort</a></li>
-                <li><a class="dropdown-item" href="#" onclick="sortData('radix'); toggleButtonColor(this);">Radix Sort</a></li>
-                <li><a class="dropdown-item" href="#" onclick="sortData('heap'); toggleButtonColor(this);">Heap Sort</a></li>
-            </ul>
+    
+    <!-- Modal para ordenar -->
+    <div class="modal fade" id="ordenarModal" tabindex="-1" aria-labelledby="ordenarModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ordenarModalLabel">Ordenar datos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Columnas -->
+                    <div class="mb-3">
+                        <label for="columnaSelect" class="form-label">Seleccionar columna:</label>
+                        <select class="form-select" id="columnaSelect">
+                            <option value="anio">Año</option>
+                            <option value="area_total">Área Total</option>
+                            <option value="area_produccion">Área Producción</option>
+                            <option value="volumen_produccion">Volumen Producción</option>
+                        </select>
+                    </div>
+                    <!-- Métodos de ordenamiento -->
+                    <div class="mb-3">
+                        <label for="metodoSelect" class="form-label">Seleccionar método de ordenamiento:</label>
+                        <select class="form-select" id="metodoSelect">
+                            <option value="bubble">Bubble Sort</option>
+                            <option value="quick">Quick Sort</option>
+                            <option value="merge">Merge Sort</option>
+                            <option value="counting">Counting Sort</option>
+                            <option value="selection">Selection Sort</option>
+                            <option value="insertion">Insertion Sort</option>
+                            <option value="bucket">Bucket Sort</option>
+                            <option value="radix">Radix Sort</option>
+                            <option value="heap">Heap Sort</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="ordenarDatos()">Ordenar</button>
+                </div>
+            </div>
         </div>
     </div>
     
-
     <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
         <table class="table table-bordered table-striped">
             <thead>
@@ -62,7 +74,7 @@
             </tbody>
         </table>
     </div>
-    
+    <script src="js/table.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <script src="js/api.js"></script>
     <script src="js/buttons.js"></script>
@@ -75,5 +87,8 @@
     <script src="js/bucketSort.js"></script>
     <script src="js/radixSort.js"></script>
     <script src="js/heapSort.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 </body>
 </html>
