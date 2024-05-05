@@ -92,13 +92,13 @@ function mostrarData(data, page) {
 
 function sortData(method,propertyName) {
     if (method === 'bubble') {
-        data = bubbleSort(data, propertyName);
+        bubbleSort(data, propertyName);
     } else if (method === 'quick') {
         data = quickSort(data, propertyName);
     } else if (method === 'merge') {
         data = mergeSort(data, propertyName);
     }else if (method === 'counting') {
-        data = countingSort(data, propertyName);
+        countingSort(data, propertyName);
     }else if (method === 'selection') {
         data = selectionSort(data, propertyName);
     }else if (method === 'insertion') {
