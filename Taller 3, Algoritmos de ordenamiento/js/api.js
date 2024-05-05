@@ -124,24 +124,31 @@ function checkForNegativeValues(columnName) {
     return data.some(item => item[columnName] < 0);
 }
 // Función para abrir el modal de ordenar
+// Modifica la función openOrdenarModal
 function openOrdenarModal() {
-    vaciarSelects(); // Vaciar los selects before opening the modal
+    vaciarSelects(); // Vacía los selects antes de abrir el modal
 
-    // Add an event listener to the column select element
+    // Deshabilita el select de métodos hasta que se seleccione una columna
+    $('#metodoSelect').prop('disabled', true);
+
+    // Añade un escuchador de eventos al select de columnas
     $('#columnaSelect').on('change', function() {
         let columnName = $(this).val();
 
-        // Check if the selected column contains negative values
+        // Habilita el select de métodos una vez se ha seleccionado una columna
+        $('#metodoSelect').prop('disabled', false);
+
+        // Verifica si la columna seleccionada contiene valores negativos
         if (checkForNegativeValues(columnName)) {
-            // Disable the counting, radix, and bucket sort options
+            // Deshabilita los métodos de ordenamiento que no funcionan con números negativos
             $('#metodoSelect option[value="counting"]').prop('disabled', true);
             $('#metodoSelect option[value="radix"]').prop('disabled', true);
             $('#metodoSelect option[value="bucket"]').prop('disabled', true);
 
-            // Display a clear explanation
-            $('#exclusionMessage').text('Counting, Radix, and Bucket sorts are disabled because they do not work with negative numbers.');
+            // Muestra una explicación clara
+            $('#exclusionMessage').text('Los métodos de ordenamiento Counting, Radix y Bucket están deshabilitados porque no funcionan con números negativos.');
         } else {
-            // Enable all options
+            // Habilita todas las opciones
             $('#metodoSelect option').prop('disabled', false);
             $('#exclusionMessage').text('');
         }
@@ -149,6 +156,7 @@ function openOrdenarModal() {
 
     $('#ordenarModal').modal('show');
 }
+
 // Función para ordenar los datos
 function ordenarDatos() {
     let columna = $('#columnaSelect').val();
