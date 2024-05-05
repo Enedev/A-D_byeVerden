@@ -1,18 +1,23 @@
 let data; // Variable global para almacenar los datos
 
-function generateRandomId() {
+function generateRandomDates() {
     // Generar un número entero aleatorio entre -10000 y 10000 para el ID
-    return Math.floor(Math.random() * 100) - 50;
+    return Math.floor(Math.random() * 1990) - 0;
 }
 
+// Cambiar el randomGenerate
+
 function fetchAndShowData() {
-    let url = 'https://jsonplaceholder.typicode.com/users/';
+    let url = 'https://www.datos.gov.co/resource/t2ca-uae5.json';
     fetch(url)
         .then(response => response.json())
         .then(result => {
             // Modificar los IDs para que sean aleatorios
             result.forEach(user => {
-                user.id = generateRandomId();
+                user.anio = generateRandomDates();
+                user.area_total = parseFloat(user.area_total); // Convertir a número
+                user.area_produccion = parseFloat(user.area_produccion); // Convertir a número
+                user.volumen_produccion = parseFloat(user.volumen_produccion); // Convertir a número
             });
             
             data = result;
@@ -25,7 +30,11 @@ function fetchAndShowData() {
 function mostrarData(data) {
     let body = "";
     for (let i = 0; i < data.length; i++) {
-        body += `<tr><td>${data[i].id}</td><td>${data[i].name}</td><td>${data[i].email}</td></tr>`;
+        body += `<tr><td>${data[i].tipo}</td><td>
+        ${data[i].rubro}</td><td>${data[i].subregion}</td><td>${data[i].anio}</td><td>${data[i].municipio}</td>
+        <td>${data[i].area_total}</td>
+        <td>${data[i].area_produccion}</td>
+        <td>${data[i].volumen_produccion}</td></tr>`;
     }
     document.getElementById('data').innerHTML = body;
     console.log("Datos mostrados en la tabla");
