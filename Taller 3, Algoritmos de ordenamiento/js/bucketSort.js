@@ -1,3 +1,5 @@
+// no funciona para negativos ni flotantes
+
 function bucketSort(arr, propertyName) {
     const n = arr.length;
     if (n === 0) return arr;

@@ -98,7 +98,7 @@ function sortData(method,propertyName) {
     } else if (method === 'merge') {
         data = mergeSort(data, propertyName);
     }else if (method === 'counting') {
-        countingSort(data, propertyName);
+        data = countingSort(data, propertyName);
     }else if (method === 'selection') {
         data = selectionSort(data, propertyName);
     }else if (method === 'insertion') {
@@ -122,6 +122,10 @@ function vaciarSelects() {
 
 function checkForNegativeValues(columnName) {
     return data.some(item => item[columnName] < 0);
+}
+
+function checkForFloatValues(columnName) {
+    return data.some(item => typeof item[columnName] === 'number' && item[columnName] !== Math.floor(item[columnName]));
 }
 // Función para abrir el modal de ordenar
 // Modifica la función openOrdenarModal
@@ -153,11 +157,24 @@ function openOrdenarModal() {
             $('#metodoSelect option').prop('disabled', false);
             $('#exclusionMessage').text('');
         }
-    });
 
+        // Verifica si la columna seleccionada contiene valores flotantes
+        if (checkForFloatValues(columnName)) {
+            // Deshabilita los métodos de ordenamiento que no funcionan con números flotantes
+            $('#metodoSelect option[value="counting"]').prop('disabled', true);
+            $('#metodoSelect option[value="radix"]').prop('disabled', true);
+            $('#metodoSelect option[value="bucket"]').prop('disabled', true);
+
+            // Muestra una explicación clara
+            $('#exclusionMessage').text('Los métodos de ordenamiento Counting, Radix y Bucket están deshabilitados porque no funcionan con números flotantes.');
+        } else {
+            // Habilita todas las opciones
+            $('#metodoSelect option').prop('disabled', false);
+            $('#exclusionMessage').text('');
+        }
+    });
     $('#ordenarModal').modal('show');
 }
-
 
 // Función para ordenar los datos
 function ordenarDatos() {

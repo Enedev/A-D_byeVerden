@@ -1,3 +1,5 @@
+// no funciona para negativos ni flotantes
+
 function radixSort(arr, propertyName) {
     const max = Math.max(...arr.map(item => item[propertyName]));
     for (let exp = 1; Math.floor(max / exp) > 0; exp *= 10) {
