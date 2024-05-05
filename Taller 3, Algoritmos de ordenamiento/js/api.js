@@ -8,6 +8,7 @@ function generateRandomDates() {
     return Math.floor(Math.random() * 1990) - 1000;
 }
 
+
 // Cambiar el randomGenerate
 
 function fetchAndShowData() {
