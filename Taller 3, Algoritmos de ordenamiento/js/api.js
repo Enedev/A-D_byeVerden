@@ -125,6 +125,7 @@ function checkForNegativeValues(columnName) {
 }
 // Función para abrir el modal de ordenar
 // Modifica la función openOrdenarModal
+// Modifica la función openOrdenarModal
 function openOrdenarModal() {
     vaciarSelects(); // Vacía los selects antes de abrir el modal
 
@@ -156,6 +157,7 @@ function openOrdenarModal() {
 
     $('#ordenarModal').modal('show');
 }
+
 
 // Función para ordenar los datos
 function ordenarDatos() {
