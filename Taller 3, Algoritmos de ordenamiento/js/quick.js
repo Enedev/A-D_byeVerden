@@ -15,5 +15,8 @@ function quickSort(arr, propertyName) {
         }
     }
 
-    return [...quickSort(left, propertyName), pivot, ...quickSort(right, propertyName)];
+    const sortedLeft = quickSort(left, propertyName);
+    const sortedRight = quickSort(right, propertyName);
+
+    return [...sortedLeft, arr[arr.length - 1], ...sortedRight];
 }

@@ -92,23 +92,23 @@ function mostrarData(data, page) {
 
 function sortData(method,propertyName) {
     if (method === 'bubble') {
-        bubbleSort(data, propertyName);
+        data = bubbleSort(data, propertyName);
     } else if (method === 'quick') {
-        quickSort(data, propertyName);
+        data = quickSort(data, propertyName);
     } else if (method === 'merge') {
-        mergeSort(data, propertyName);
+        data = mergeSort(data, propertyName);
     }else if (method === 'counting') {
-        countingSort(data, propertyName);
+        data = countingSort(data, propertyName);
     }else if (method === 'selection') {
-        selectionSort(data, propertyName);
+        data = selectionSort(data, propertyName);
     }else if (method === 'insertion') {
-        insertionSort(data, propertyName);
+        data = insertionSort(data, propertyName);
     }else if (method === 'bucket') {
-        bucketSort(data, propertyName);
+        data = bucketSort(data, propertyName);
     }else if (method === 'radix') {
-        radixSort(data, propertyName);
-    }else if (method === 'radix') {
-        heapSort(data, propertyName);
+        data = radixSort(data, propertyName);
+    }else if (method === 'heap') {
+        data = heapSort(data, propertyName);
     }
     currentPage = 1; 
     mostrarData(data, currentPage); // Actualizar la tabla después de ordenar
