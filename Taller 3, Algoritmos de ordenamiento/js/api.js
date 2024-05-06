@@ -5,7 +5,7 @@ let currentPage = 1; // Página actual
 
 function generateRandomDates() {
     // Generar un número entero aleatorio entre -10000 y 10000 para el ID
-    return Math.floor(Math.random() * 1990) - 1000;
+    return Math.floor(Math.random() * 1990) - 0; //Si quiere revisar que hay excepciones con los negativos, cambie este 0 a 1000
 }
 
 
@@ -124,6 +124,10 @@ function checkForNegativeValues(columnName) {
     return data.some(item => item[columnName] < 0);
 }
 
+function checkForStringValues(columnName) {
+    return data.some(item => typeof item[columnName] === 'string');
+}
+
 function checkForFloatValues(columnName) {
     return data.some(item => typeof item[columnName] === 'number' && item[columnName] !== Math.floor(item[columnName]));
 }
@@ -143,8 +147,13 @@ function openOrdenarModal() {
         // Habilita el select de métodos una vez se ha seleccionado una columna
         $('#metodoSelect').prop('disabled', false);
 
+        // Habilita todas las opciones y borra el mensaje de exclusión
+        $('#metodoSelect option').prop('disabled', false);
+        $('#exclusionMessage').text('');
+
         // Verifica si la columna seleccionada contiene valores negativos
         if (checkForNegativeValues(columnName)) {
+            console.log("funciono negativos")
             // Deshabilita los métodos de ordenamiento que no funcionan con números negativos
             $('#metodoSelect option[value="counting"]').prop('disabled', true);
             $('#metodoSelect option[value="radix"]').prop('disabled', true);
@@ -152,14 +161,11 @@ function openOrdenarModal() {
 
             // Muestra una explicación clara
             $('#exclusionMessage').text('Los métodos de ordenamiento Counting, Radix y Bucket están deshabilitados porque no funcionan con números negativos.');
-        } else {
-            // Habilita todas las opciones
-            $('#metodoSelect option').prop('disabled', false);
-            $('#exclusionMessage').text('');
         }
 
         // Verifica si la columna seleccionada contiene valores flotantes
         if (checkForFloatValues(columnName)) {
+            console.log("funciono floats")
             // Deshabilita los métodos de ordenamiento que no funcionan con números flotantes
             $('#metodoSelect option[value="counting"]').prop('disabled', true);
             $('#metodoSelect option[value="radix"]').prop('disabled', true);
@@ -167,14 +173,23 @@ function openOrdenarModal() {
 
             // Muestra una explicación clara
             $('#exclusionMessage').text('Los métodos de ordenamiento Counting, Radix y Bucket están deshabilitados porque no funcionan con números flotantes.');
-        } else {
-            // Habilita todas las opciones
-            $('#metodoSelect option').prop('disabled', false);
-            $('#exclusionMessage').text('');
+        }
+
+        // Verifica si la columna seleccionada contiene cadenas de texto
+        if (checkForStringValues(columnName)) {
+            console.log("funciono palabras")
+            // Deshabilita los métodos de ordenamiento que no funcionan con cadenas de texto
+            $('#metodoSelect option[value="counting"]').prop('disabled', true);
+            $('#metodoSelect option[value="radix"]').prop('disabled', true);
+            $('#metodoSelect option[value="bucket"]').prop('disabled', true);
+
+            // Muestra una explicación clara
+            $('#exclusionMessage').text('Los métodos de ordenamiento Counting, Radix y Bucket están deshabilitados porque no funcionan con cadenas de texto.');
         }
     });
     $('#ordenarModal').modal('show');
 }
+
 
 // Función para ordenar los datos
 function ordenarDatos() {
@@ -183,6 +198,12 @@ function ordenarDatos() {
     sortData(metodo, columna);
     $('#ordenarModal').modal('hide'); // Cierra el modal al ordenar
     vaciarSelects(); // Vaciar los selects después de ordenar
+    $('#exclusionMessage').text('');
+}
+
+function vaciarDatos() {
+    vaciarSelects(); // Vaciar los selects después de ordenar
+    $('#exclusionMessage').text('');
 }
 
 fetchAndShowData(); // Cargar y mostrar los datos al cargar la página
