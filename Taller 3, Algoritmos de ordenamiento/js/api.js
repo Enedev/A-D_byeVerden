@@ -5,7 +5,7 @@ let currentPage = 1; // Página actual
 
 function generateRandomDates() {
     // Generar un número entero aleatorio entre -10000 y 10000 para el ID
-    return Math.floor(Math.random() * 1990) - 0; //Si quiere revisar que hay excepciones con los negativos, cambie este 0 a 1000
+    return Math.floor(Math.random() * 1990) - 1000; //Si quiere revisar que hay excepciones con los negativos, cambie este 0 a 1000
 }
 
 
@@ -90,29 +90,42 @@ function mostrarData(data, page) {
 }
 // Resto de tu código...
 
-function sortData(method,propertyName) {
-    if (method === 'bubble') {
-        bubbleSort(data, propertyName);
-    } else if (method === 'quick') {
-        data = quickSort(data, propertyName);
-    } else if (method === 'merge') {
-        data = mergeSort(data, propertyName);
-    }else if (method === 'counting') {
-        data = countingSort(data, propertyName);
-    }else if (method === 'selection') {
-        data = selectionSort(data, propertyName);
-    }else if (method === 'insertion') {
-        data = insertionSort(data, propertyName);
-    }else if (method === 'bucket') {
-        data = bucketSort(data, propertyName);
-    }else if (method === 'radix') {
-        data = radixSort(data, propertyName);
-    }else if (method === 'heap') {
-        data = heapSort(data, propertyName);
+function sortData(method, propertyName) {
+    switch (method) {
+        case 'bubble':
+            bubbleSort(data, propertyName);
+            break;
+        case 'quick':
+            data = quickSort(data, propertyName);
+            break;
+        case 'merge':
+            data = mergeSort(data, propertyName);
+            break;
+        case 'counting':
+            data = countingSort(data, propertyName);
+            break;
+        case 'selection':
+            data = selectionSort(data, propertyName);
+            break;
+        case 'insertion':
+            data = insertionSort(data, propertyName);
+            break;
+        case 'bucket':
+            data = bucketSort(data, propertyName);
+            break;
+        case 'radix':
+            data = radixSort(data, propertyName);
+            break;
+        case 'heap':
+            data = heapSort(data, propertyName);
+            break;
+        default:
+            console.error('Método de ordenamiento no válido');
     }
-    currentPage = 1; 
+    currentPage = 1;
     mostrarData(data, currentPage); // Actualizar la tabla después de ordenar
 }
+
 
 // Función para vaciar los elementos select
 function vaciarSelects() {
