@@ -1,49 +1,66 @@
 class Node:
-    def _init_(self, value):
+    def __init__(self,value):
         self.value = value
-        self.left =None
-        self.right=None
+        self.left = None
+        self.right = None
 
 def insert(root,node):
+    if not isinstance(root, Node) or not isinstance(node, Node):
+        raise TypeError("Los argumentos deben ser instancias de la clase Node")
+    
     if root is None:
-    root = none
+        root = node
     else:
         if root.value < node.value:
             if root.right is None:
                 root.right = node
             else:
+                insert(root.right, node)
+        else:
+            if root.left is None:
+                root.left = node
+            else:
                 insert(root.left, node)
 
-def inOrder(root, values):
+def inOrden(root, values):
+    if not isinstance(root, Node):
+        raise TypeError("El argumento root debe ser una instancia de la clase Node")
+    
     if root is not None:
-        inOrder(root.left, values)
+        inOrden(root.left, values)
         values.append(root.value)
-        inOrder(root.right, values)
+        inOrden(root.right, values)
 
 def min_sum_of_absolute_differences(root_A,root_B):
+    if not isinstance(root_A, Node) or not isinstance(root_B, Node):
+        raise TypeError("Los argumentos deben ser instancias de la clase Node")
+    
     values_A = []
     values_B = []
 
-    inOrder(root_A, values_A)
-    inOrder(root_B, values_B)
+    inOrden(root_A, values_A)
+    inOrden(root_B, values_B)
 
-    values_A.sort ()
-    values_B.sort ()
+    values_A.sort()
+    values_B.sort()
 
-    result = sum(abs(a-b) for a,b in zip(values_A, values_B))
+    result = sum(abs(a-b) for a,b in zip(values_A,values_B))
     return result
 
-#ejemplo de uso
+# Ejemplo de uso
 root_A = Node(4)
 insert(root_A, Node(1))
 insert(root_A, Node(8))
 insert(root_A, Node(7))
 
+
 root_B = Node(2)
-insert(root_A, Node(3))
-insert(root_A, Node(6))
-insert(root_A, Node(5))
+insert(root_B, Node(3))
+insert(root_B, Node(6))
+insert(root_B, Node(5))
 
-result = min_sum_of_absolute_differences(root_A, root_B)
-
-print("El resultado de la suma de absolutos:", result)
+try:
+    result = min_sum_of_absolute_differences(root_A, root_B)
+    print("El resultado de la suma de absolutos tikitiki:", result)
+except TypeError as e:
+    print("Error:", e)
