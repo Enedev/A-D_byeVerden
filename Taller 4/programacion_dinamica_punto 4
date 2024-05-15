@@ -1,0 +1,23 @@
+def min_diff(arr):
+    n = len(arr)
+    total_sum = sum(arr)
+    dp = [[False] * (total_sum + 1) for _ in range(n + 1)]
+    dp[0][0] = True
+
+    for i in range(1, n + 1):
+        for j in range(total_sum // 2 + 1):
+            if dp[i - 1][j]:
+                dp[i][j + arr[i - 1]] = True
+                dp[i][j] = True
+
+    min_sum = total_sum
+    for j in range(total_sum // 2, -1, -1):
+        if dp[n][j]:
+            min_sum = j
+            break
+
+    min_diff = total_sum - 2 * min_sum
+    return min_diff
+
+arr = [1, 6, 11, 5]
+print("La diferencia mínima es:", min_diff(arr))
